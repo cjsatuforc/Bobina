@@ -4,22 +4,29 @@
 # include "WProgram.h"
 
 #endif
-#include "Robot.h"
 
+#include "Robot.h"
+#include "Command.h"
 
 #define BLINK_PIN 3
 #define DATA_RATE 38400
 
-Robot bobina;
+//vai virar atributo
+#define SERVO_1_PIN  10
+#define SERVO_2_PIN  11
+#define SERVO_3_PIN  7
+#define SERVO_4_PIN  8
 
+Robot bobina;
+Command command;
 
 
 
 #define DATA_RATE 9600
 void setup() {
   Serial.begin(DATA_RATE);
-   bobina.setup();
-   Serial.println("Iniciando bobina");
+  bobina.setup(SERVO_1_PIN,SERVO_2_PIN,SERVO_3_PIN,SERVO_4_PIN);
+  Serial.println("Iniciando bobina");
   
   
 }
@@ -29,26 +36,20 @@ void loop() {
   if (Serial.available()){
     char op = Serial.read();
     Serial.println(op);
-    switch ( op )
+    switch ( command.proccess() )
     {
-      case 't':  
+      case MOVE_ON:  
        bobina.ir_tras();
        break;
-     case 'f':
+     case MOVE_BACK:
       bobina.ir_frente();
         break;
-      case 'd':
+      case MOVE_RIGHT:
         bobina.ir_direita();
          break;
-      case 'e':
+      case MOVE_LEFT:
         bobina.ir_esquerda();
-        break;
-      case 'h':
-        digitalWrite(BLINK_PIN,HIGH);
-        break;
-      case 'x':
-        digitalWrite(BLINK_PIN,LOW);
-        break;
+        break;      
     }
   }
   
