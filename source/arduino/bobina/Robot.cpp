@@ -170,7 +170,7 @@ static int dir = 0;
 void Robot::ir_esquerda()
 {
   
-    static int dir = 0;
+  static int dir = 0;
   if ( dir == 0)
   {
     frente_direita();

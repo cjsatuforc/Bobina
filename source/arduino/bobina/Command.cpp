@@ -8,6 +8,8 @@
 
 #include "Command.h"
 
+
+
 int Command::proccess()
 {
 	if (Serial.available()){
@@ -26,6 +28,9 @@ int Command::proccess()
 	       
 	    case 'e':
 	        return MOVE_LEFT;
+
+	    case 'x':
+	    	return TEST_MOTORS;
 	        
 	        
 	    }
