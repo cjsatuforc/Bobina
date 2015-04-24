@@ -41,9 +41,9 @@ void testMotors()
   Serial.println("girando perna esquerda");
   bobina.move_motor(SERVO_1,SERVO_1_INITIAL_POSITION);
   delay(1000);
-  bobina.move_motor(SERVO_1,SERVO_1_INITIAL_POSITION+ANGULO_MOVER_PERNA);
+  bobina.move_motor(SERVO_1,SERVO_1_INITIAL_POSITION+LEG_MOVE_DEGREES);
   delay(1000);
-  bobina.move_motor(SERVO_1,SERVO_1_INITIAL_POSITION-ANGULO_MOVER_PERNA);
+  bobina.move_motor(SERVO_1,SERVO_1_INITIAL_POSITION-LEG_MOVE_DEGREES);
   delay(1000);
   bobina.move_motor(SERVO_1,SERVO_1_INITIAL_POSITION);
   delay(1000);
@@ -51,9 +51,9 @@ void testMotors()
   Serial.println("girando perna direita");
   bobina.move_motor(SERVO_2,SERVO_2_INITIAL_POSITION);
   delay(1000);
-  bobina.move_motor(SERVO_2,SERVO_2_INITIAL_POSITION+ANGULO_MOVER_PERNA);
+  bobina.move_motor(SERVO_2,SERVO_2_INITIAL_POSITION+LEG_MOVE_DEGREES);
   delay(1000);
-  bobina.move_motor(SERVO_2,SERVO_2_INITIAL_POSITION-ANGULO_MOVER_PERNA);
+  bobina.move_motor(SERVO_2,SERVO_2_INITIAL_POSITION-LEG_MOVE_DEGREES);
   delay(1000);
   bobina.move_motor(SERVO_2,SERVO_2_INITIAL_POSITION);
   delay(1000);
@@ -61,9 +61,9 @@ void testMotors()
   Serial.println("inclinando perna esquerda");
   bobina.move_motor(SERVO_3,SERVO_2_INITIAL_POSITION);
   delay(1000);
-  bobina.move_motor(SERVO_3,SERVO_2_INITIAL_POSITION+ANGULO_MOVER_PERNA);
+  bobina.move_motor(SERVO_3,SERVO_2_INITIAL_POSITION+LEG_MOVE_DEGREES);
   delay(1000);
-  bobina.move_motor(SERVO_3,SERVO_2_INITIAL_POSITION-ANGULO_MOVER_PERNA);
+  bobina.move_motor(SERVO_3,SERVO_2_INITIAL_POSITION-LEG_MOVE_DEGREES);
   delay(1000);
   bobina.move_motor(SERVO_3,SERVO_2_INITIAL_POSITION);
   delay(1000);
@@ -71,9 +71,9 @@ void testMotors()
   Serial.println("inclinando perna direita");
   bobina.move_motor(SERVO_4,SERVO_2_INITIAL_POSITION);
   delay(1000);
-  bobina.move_motor(SERVO_4,SERVO_2_INITIAL_POSITION+ANGULO_MOVER_PERNA);
+  bobina.move_motor(SERVO_4,SERVO_2_INITIAL_POSITION+LEG_MOVE_DEGREES);
   delay(1000);
-  bobina.move_motor(SERVO_4,SERVO_2_INITIAL_POSITION-ANGULO_MOVER_PERNA);
+  bobina.move_motor(SERVO_4,SERVO_2_INITIAL_POSITION-LEG_MOVE_DEGREES);
   delay(1000);
   bobina.move_motor(SERVO_4,SERVO_2_INITIAL_POSITION);
   delay(1000);  
@@ -88,16 +88,16 @@ void loop() {
     switch ( command.proccess() )
     {
       case MOVE_ON:  
-       bobina.ir_frente();
+       bobina.move_on();
        break;
      case MOVE_BACK:
-      bobina.ir_tras();
+      bobina.move_back();
         break;
       case MOVE_RIGHT:
-        bobina.ir_direita();
+        bobina.move_right();
          break;
       case MOVE_LEFT:
-        bobina.ir_esquerda();
+        bobina.move_left();
         break; 
       case TEST_MOTORS:
         testMotors();

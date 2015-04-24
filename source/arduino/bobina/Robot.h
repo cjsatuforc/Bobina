@@ -10,7 +10,7 @@
 #include "Servo.h"
 
 /*
- * values that identifies the
+ * id's that identifies the
  * motors of the rotot
  */
 #define SERVO_1     11
@@ -27,7 +27,7 @@
 #define SERVO_4_INITIAL_POSITION 99//tava 99
 
 
-#define ANGULO_MOVER_PERNA 30
+#define LEG_MOVE_DEGREES 30
 
 
 
@@ -47,16 +47,11 @@ class Robot{
 
     bool move_motor(int motor_id,int servo_degrees);
 
-
-    void frente_esquerda();
-    void frente_direita();
-    void tras_esquerda();
-    void tras_direita();
-    void ajeita_direita();    
-    void ir_frente();
-    void ir_tras();
-    void ir_direita();
-    void ir_esquerda();
+    
+    void move_on();
+    void move_back();
+    void move_left();
+    void move_right();
 private:
     int tempo_espera = 100;
     
@@ -64,6 +59,12 @@ private:
     Servo servo2;
     Servo servo3;
     Servo servo4;
+
+    void move_on_left();
+    void move_on_right();
+    void move_back_left();
+    void move_back_right();
+    void ajeita_direita();   
 
 };
 

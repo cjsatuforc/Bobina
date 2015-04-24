@@ -22,14 +22,14 @@ void Robot::setup(int servo1_pin,int servo2_pin,int servo3_pin,int servo4_pin)
   Robot::servo4.write(SERVO_4_INITIAL_POSITION);  
 }
 
-void Robot::frente_esquerda()
+void Robot::move_on_left()
 {
    
-  servo3.write(   SERVO_3_INITIAL_POSITION + ANGULO_MOVER_PERNA );
-  servo4.write(   SERVO_4_INITIAL_POSITION + ANGULO_MOVER_PERNA );
+  servo3.write(   SERVO_3_INITIAL_POSITION + LEG_MOVE_DEGREES );
+  servo4.write(   SERVO_4_INITIAL_POSITION + LEG_MOVE_DEGREES );
   delay(400);
-  servo2.write(   SERVO_2_INITIAL_POSITION - ANGULO_MOVER_PERNA );
-  servo1.write(   SERVO_1_INITIAL_POSITION - ANGULO_MOVER_PERNA );
+  servo2.write(   SERVO_2_INITIAL_POSITION - LEG_MOVE_DEGREES );
+  servo1.write(   SERVO_1_INITIAL_POSITION - LEG_MOVE_DEGREES );
   delay(400);
   servo4.write(   SERVO_4_INITIAL_POSITION);
   servo3.write(   SERVO_3_INITIAL_POSITION);  
@@ -39,14 +39,14 @@ void Robot::frente_esquerda()
 
 
 
-void Robot::frente_direita()
+void Robot::move_on_right()
 {
 
-   servo3.write(   SERVO_3_INITIAL_POSITION - ANGULO_MOVER_PERNA );
-   servo4.write(   SERVO_4_INITIAL_POSITION - ANGULO_MOVER_PERNA );
+   servo3.write(   SERVO_3_INITIAL_POSITION - LEG_MOVE_DEGREES );
+   servo4.write(   SERVO_4_INITIAL_POSITION - LEG_MOVE_DEGREES );
    delay(400);
-   servo1.write(   SERVO_1_INITIAL_POSITION + ANGULO_MOVER_PERNA );
-   servo2.write(   SERVO_2_INITIAL_POSITION + ANGULO_MOVER_PERNA );
+   servo1.write(   SERVO_1_INITIAL_POSITION + LEG_MOVE_DEGREES );
+   servo2.write(   SERVO_2_INITIAL_POSITION + LEG_MOVE_DEGREES );
    delay(400);
    servo4.write(   SERVO_4_INITIAL_POSITION);
    servo3.write(   SERVO_3_INITIAL_POSITION);
@@ -54,27 +54,27 @@ void Robot::frente_direita()
 
 }
 
-void Robot::tras_esquerda()
+void Robot::move_back_left()
 {
   
-   servo3.write(   SERVO_3_INITIAL_POSITION + ANGULO_MOVER_PERNA );
-   servo4.write(   SERVO_4_INITIAL_POSITION + ANGULO_MOVER_PERNA );
+   servo3.write(   SERVO_3_INITIAL_POSITION + LEG_MOVE_DEGREES );
+   servo4.write(   SERVO_4_INITIAL_POSITION + LEG_MOVE_DEGREES );
    delay(400);
-   servo2.write(   SERVO_2_INITIAL_POSITION + ANGULO_MOVER_PERNA );
-   servo1.write(   SERVO_1_INITIAL_POSITION + ANGULO_MOVER_PERNA );
+   servo2.write(   SERVO_2_INITIAL_POSITION + LEG_MOVE_DEGREES );
+   servo1.write(   SERVO_1_INITIAL_POSITION + LEG_MOVE_DEGREES );
    delay(400);
    servo4.write(   SERVO_4_INITIAL_POSITION);
    servo3.write(   SERVO_3_INITIAL_POSITION);  
    
 }
-void Robot::tras_direita()
+void Robot::move_back_right()
 {
 
-  servo3.write(   SERVO_3_INITIAL_POSITION - ANGULO_MOVER_PERNA );
-   servo4.write(   SERVO_4_INITIAL_POSITION - ANGULO_MOVER_PERNA );
+  servo3.write(   SERVO_3_INITIAL_POSITION - LEG_MOVE_DEGREES );
+   servo4.write(   SERVO_4_INITIAL_POSITION - LEG_MOVE_DEGREES );
    delay(400);
-   servo1.write(   SERVO_1_INITIAL_POSITION - ANGULO_MOVER_PERNA );
-   servo2.write(   SERVO_2_INITIAL_POSITION - ANGULO_MOVER_PERNA );
+   servo1.write(   SERVO_1_INITIAL_POSITION - LEG_MOVE_DEGREES );
+   servo2.write(   SERVO_2_INITIAL_POSITION - LEG_MOVE_DEGREES );
    delay(400);
    servo4.write(   SERVO_4_INITIAL_POSITION);
    servo3.write(   SERVO_3_INITIAL_POSITION);
@@ -84,8 +84,8 @@ void Robot::tras_direita()
 void Robot::ajeita_direita()
 {
   
-   servo3.write(   SERVO_3_INITIAL_POSITION - ANGULO_MOVER_PERNA );
-   servo4.write(   SERVO_4_INITIAL_POSITION - ANGULO_MOVER_PERNA );
+   servo3.write(   SERVO_3_INITIAL_POSITION - LEG_MOVE_DEGREES );
+   servo4.write(   SERVO_4_INITIAL_POSITION - LEG_MOVE_DEGREES );
    delay(400);
    servo1.write(   SERVO_3_INITIAL_POSITION);
    servo2.write(   SERVO_4_INITIAL_POSITION);
@@ -121,64 +121,47 @@ bool Robot::move_motor(int motor_id,int servo_degrees)
     return false;
 
 }
-void Robot::ir_frente()
+void Robot::move_on()
 {
   
   static int dir = 0;
   if ( dir == 0)
   {
-     frente_direita();
+     move_on_right();
      dir = 1; 
   }else{
-    frente_esquerda();
+    move_on_left();
     dir = 0;
   }
   delay(tempo_espera);
   
 
 }
-void Robot::ir_tras()
+void Robot::move_back()
 {
 
   static int dir = 0;
   if ( dir == 0)
   {
-    tras_direita();
+    move_back_left();
     dir = 1; 
   }else{
-    tras_esquerda();
+    move_back_right();
     dir = 0;
   }
   delay(tempo_espera);
   
 }
-void Robot::ir_direita()
+void Robot::move_right()
 {
 
-static int dir = 0;
-  if ( dir == 0)
-  {
-    tras_direita();
-    dir = 1; 
-  }else{
-    ajeita_direita();
-    dir = 0;
-  }
-  delay(tempo_espera);  
+  delay(tempo_espera);
   
 }
-void Robot::ir_esquerda()
+void Robot::move_left()
 {
   
-  static int dir = 0;
-  if ( dir == 0)
-  {
-    frente_direita();
-    dir = 1; 
-  }else{
-    ajeita_direita();
-    dir = 0;
-  }
+
   delay(tempo_espera);
   
 }
