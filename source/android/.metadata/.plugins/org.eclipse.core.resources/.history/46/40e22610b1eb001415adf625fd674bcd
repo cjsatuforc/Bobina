@@ -1,0 +1,31 @@
+package com.bobina;
+
+import android.app.Activity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
+public class Control {
+	private Activity activity;
+	
+	public Control(Activity activity,int upId,int backId,int rightId,int leftId) {
+		this.activity 	=  activity;
+	
+		setListeners();
+		disableButtons();
+	}
+
+	public Control(Activity activity,Button up, Button back, Button right, Button left) {
+		super();
+		this.up = up;
+		this.back = back;
+		this.right = right;
+		this.left = left;
+		this.activity = activity;
+		setListeners();
+		disableButtons();
+	}
+	
+	
+	
+}

@@ -1,0 +1,57 @@
+package com.bobina;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
+
+
+public class MainActivity extends Activity {
+
+	private Button up;
+	private Button back;
+	private Button right;
+	private Button left;
+
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);             
+    	
+    	setContentView(R.layout.main_layout); 
+    	
+    	this.up 		= (Button) activity.findViewById(upId);
+		this.back 		= (Button) activity.findViewById(backId);
+		this.left 		= (Button) activity.findViewById(leftId);
+		this.right 		= (Button) activity.findViewById(rightId);
+		
+    }
+    
+    void hideActionBar(){
+//    	android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+//    	actionBar.hide();
+    }
+
+   
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main, menu);
+    	return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+        	Toast.makeText(this, "Settings", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

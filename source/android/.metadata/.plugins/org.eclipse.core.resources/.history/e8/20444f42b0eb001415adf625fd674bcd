@@ -1,0 +1,28 @@
+package com.bobina;
+
+import android.content.Context;
+import android.widget.Button;
+
+public class Control {
+	private Button up;
+	private Button back;
+	private Button right;
+	private Button left;
+	private Context context;
+	
+	public Control(Context context,int upId,int backId,int rightId,int leftId) {
+		this.context 	=  context;
+		this.up 		= (Button) context.fi
+	}
+
+	public Control(Context context,Button up, Button back, Button right, Button left) {
+		super();
+		this.up = up;
+		this.back = back;
+		this.right = right;
+		this.left = left;
+		this.context = context;
+	}
+	
+	
+}

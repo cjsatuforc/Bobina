@@ -1,0 +1,7 @@
+package com.bobina.view;
+
+import android.widget.TextView;
+
+public class ConsoleView extends TextView{
+
+}

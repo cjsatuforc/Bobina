@@ -1,0 +1,18 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme for API 11+. This theme completely replaces
+        AppBaseTheme from res/values/styles.xml on API 11+ devices.
+    -->
+    <style name="AppBaseTheme" parent="Base.Theme.AppCompat.Light">
+        
+        
+    </style>
+    <s
+    <!-- Titles of project -->
+    <style name="AppTitle" parent="AppBaseTheme">
+        <item name="android:textSize">32sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>

@@ -1,0 +1,109 @@
+package com.bobina;
+
+import com.bobina.view.ConsoleView;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
+
+
+public class MainActivity extends Activity {
+
+	private Button 		up;
+	private Button 		back;
+	private Button 		right;
+	private Button 		left;
+	private ConsoleView console;
+
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);             
+    	
+    	setContentView(R.layout.main_layout); 
+    	
+    	this.up 		= (Button) findViewById(R.id.control_button_up);
+		this.back 		= (Button) findViewById(R.id.control_button_back);
+		this.left 		= (Button) findViewById(R.id.control_button_left);
+		this.right 		= (Button) findViewById(R.id.control_button_right);
+	
+		this.console	= (ConsoleView)findViewById(R.id.console);
+		setListeners();
+    }
+    
+    void hideActionBar(){
+//    	android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+//    	actionBar.hide();
+    }
+
+    
+    
+    void disableButtons(){
+		this.up.setEnabled(false);
+		this.back.setEnabled(false);
+		this.left.setEnabled(false);
+		this.right.setEnabled(false);
+	}
+	private void setListeners(){
+		this.up.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				writeToConsole("up");
+			}
+		});
+		
+		this.back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				writeToConsole("back");
+			}
+		});
+		
+		this.left.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
+		
+		this.right.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
+	}
+    
+   
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main, menu);
+    	return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+        	Toast.makeText(this, "Settings", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    void writeToConsole(String message){
+    	console.writeText(message);;
+    }
+}

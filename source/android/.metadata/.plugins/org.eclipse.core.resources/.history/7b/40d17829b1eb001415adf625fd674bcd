@@ -1,0 +1,12 @@
+package com.bobina.view;
+
+import android.content.Context;
+import android.widget.TextView;
+
+public class ConsoleView extends TextView{
+
+	public ConsoleView(Context context) {
+		super(context);
+	}
+
+}

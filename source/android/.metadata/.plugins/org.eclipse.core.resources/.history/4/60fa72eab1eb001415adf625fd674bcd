@@ -1,0 +1,24 @@
+package com.bobina.view;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.TextView;
+
+public class ConsoleView extends TextView{
+
+	public ConsoleView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+	public ConsoleView(Context context) {
+		super(context);
+	}
+	
+	public void writeText(String text){
+		String oldString = getText().toString();
+		String newString = oldString + "[output]: "+text+"\n";
+		setText(old);
+	}
+
+	
+
+}
