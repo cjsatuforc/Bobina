@@ -1,0 +1,21 @@
+package com.bobina.communication;
+/**
+ * Interface to Communicate with robot
+ * @author Eduardo
+ *
+ */
+public interface Communication {
+	/**
+	 * Inititialize the communication channel
+	 * @throws Exception
+	 */
+	public void initialize() throws Exception;
+	
+	public void finalize() throws Exception;
+	
+	public void send(byte [] data ) throws Exception;
+	
+	public byte [] recieve() throws Exception;
+	
+	
+}

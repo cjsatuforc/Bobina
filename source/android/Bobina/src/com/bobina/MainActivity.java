@@ -1,17 +1,22 @@
 package com.bobina;
 
-import com.bobina.view.ConsoleView;
-
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.bobina.robot.Robot;
+import com.bobina.robot.commands.CommandsDAO;
+import com.bobina.robot.communication.BluetoothCommunication;
+import com.bobina.robot.communication.Communication;
+import com.bobina.robot.communication.CommunicationListener;
+import com.bobina.view.ConsoleView;
 
 
 public class MainActivity extends Activity {
@@ -20,10 +25,13 @@ public class MainActivity extends Activity {
 	private ImageButton 		back;
 	private ImageButton 		right;
 	private ImageButton 		left;
+	
 	private ConsoleView 		console;
 
-	
-    @Override
+	private Robot				robot;
+	private BluetoothCommunication communication;
+    
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);             
     	
@@ -36,6 +44,7 @@ public class MainActivity extends Activity {
 	
 		this.console	= (ConsoleView)findViewById(R.id.console);
 		setListeners();
+		disableActionButtons();
     }
     
     void hideActionBar(){
@@ -56,7 +65,13 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				writeToConsole("up");
+				
+				try {
+					robot.moveOn();
+				} catch (Exception e) {
+					e.printStackTrace();
+					writeOutput(e.getMessage());
+				}
 			}
 		});
 		
@@ -64,15 +79,24 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				writeToConsole("back");
+				try {
+					robot.moveBack();
+				} catch (Exception e) {					
+					e.printStackTrace();
+					writeOutput(e.getMessage());
+				}
 			}
 		});
 		
-		this.left.setOnClickListener(new OnClickListener() {
-			
+		this.left.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				writeToConsole("left");
+				try{
+					robot.moveLeft();
+				}catch(Exception e){
+					writeOutput(e.getMessage());
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -80,7 +104,12 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				writeToConsole("right");
+				try{				
+					robot.moveRight();
+				}catch (Exception e){
+					e.printStackTrace();
+					writeOutput(e.getMessage());
+				}
 			}
 		});
 	}
@@ -94,17 +123,119 @@ public class MainActivity extends Activity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        
+        switch (id){
+        case R.id.action_settings:
         	Toast.makeText(this, "Settings", Toast.LENGTH_LONG).show();
             return true;
+        case R.id.action_disconnect:
+        	Toast.makeText(this, "Disconnect", Toast.LENGTH_LONG).show();
+        	try{
+        		disconned();
+        	}catch (Exception e) {
+        		writeOutput(e.getMessage());
+        		e.printStackTrace();
+			}
+            return true;
+        case R.id.action_connect:
+        	Toast.makeText(this, "Connect", Toast.LENGTH_LONG).show();
+        	try{
+        		writeOutput("connecting");
+        		connect();
+        		
+        	}catch (Exception e) {
+        		writeOutput(e.getMessage());
+        		e.printStackTrace();
+			}
+        	
+            return true;
+            
         }
+        
+        
         return super.onOptionsItemSelected(item);
     }
-    void writeToConsole(String message){
-    	console.writeText(message);;
+    
+    
+    void connect() throws Exception{
+    	//connect to robot
+    	communication = new BluetoothCommunication(this);
+    	communication.setListener(communicationListener);
+		communication.initialize();
+		communication.connect();
+		
     }
+    void disconned() throws Exception{
+    	communication.shutdown();
+    	communication 	= null;
+    	robot 			=  null;
+    	disableActionButtons();
+    }
+    void enableActionButtons(){
+    	this.up.setEnabled(true);
+    	this.back.setEnabled(true);
+    	this.right.setEnabled(true);
+    	this.left.setEnabled(true);
+    }
+    void disableActionButtons(){
+    	this.up.setEnabled(false);
+    	this.back.setEnabled(false);
+    	this.right.setEnabled(false);
+    	this.left.setEnabled(false);
+    }
+
+    void writeOutput(String message){
+    	console.write("OUTPUT",message);;
+    }
+    
+    void writeInput(String message){
+    	console.write("INPUT",message);;
+    }
+    private CommunicationListener communicationListener = new CommunicationListener() {
+		
+		@Override
+		public void onConnect() {
+			CommandsDAO commandDao = new CommandsDAO(); 
+			MainActivity.this.robot = new Robot(communication, commandDao.getDefaultCommands());
+			
+			//enable the buttons
+			enableActionButtons();
+			
+			//start recieve task
+			new RecieveTask().execute(communication);
+			
+			writeOutput("connected");
+		}
+	};
+    
+	
+	private class RecieveTask extends AsyncTask<Communication, byte [] , Void>{
+
+		@Override
+		protected Void doInBackground(Communication... params) {
+			if ( params.length<=0)
+				throw new IllegalStateException("Invalid parameter");
+			Communication communication = params[0];
+			try{
+				do{
+					byte [] data = communication.recieve();
+					this.publishProgress(data);
+				}while(communication.isConnected());
+			}catch (Exception e) {
+				publishProgress(("Error:"+e.getMessage()).getBytes());
+			}
+			return null;
+		}
+		
+		@Override
+		protected void onProgressUpdate(byte[]... values) {
+			if ( values.length >0){
+				byte [] data = values[0];
+				writeInput(new String(data));
+			}
+			
+		}
+		
+	}
 }

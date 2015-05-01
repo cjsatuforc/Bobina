@@ -1,0 +1,11 @@
+package com.bobina.robot.commands;
+
+public class CommandsDAO {
+	public Commands getDefaultCommands(){
+		
+	}
+	
+	public Commands getCustonCommands(){
+		return getDefaultCommands();
+	}
+}

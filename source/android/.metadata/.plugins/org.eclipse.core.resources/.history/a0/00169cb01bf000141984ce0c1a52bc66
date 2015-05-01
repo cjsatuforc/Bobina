@@ -1,0 +1,69 @@
+package com.bobina.robot.communication;
+
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
+
+/**
+ * Communicates with the robot throw Bluetooth
+ * @author Eduardo
+ *
+ */
+public class BluetoothCommunication implements Communication{
+
+	private Activity activity;
+	private CommunicationListener communicationListener;
+	private BluetoothAdapter mBluetoothAdapter;
+	
+	public BluetoothCommunication(Activity activity) {
+		this.activity = activity;
+	}
+	
+	@Override
+	public void initialize() throws Exception {
+		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		//check if bluetooth is supported
+		if (mBluetoothAdapter == null) {
+			throw new IllegalStateException("Bluetooth not supported");
+		}
+
+		//enable bluetooth
+		if (!mBluetoothAdapter.isEnabled()) {
+		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+		    activity.startActivityForResult(enableBtIntent, 0);
+		}
+	}
+
+	
+	
+	@Override
+	public void send(byte[] data) throws Exception {
+		
+	}
+
+	@Override
+	public byte[] recieve() throws Exception {
+		return null;
+	}
+
+	@Override
+	public void shutdown() throws Exception {
+		
+	}
+	
+	@Override
+	public boolean isConnected() throws Exception {
+		return false;
+	}
+
+	@Override
+	public void connect() throws Exception {
+		
+	}
+
+	@Override
+	public void setListener(CommunicationListener listener) {
+		this.communicationListener = listener;
+	}
+
+}

@@ -1,0 +1,14 @@
+package com.bobina.communication;
+
+public interface Communication {
+	
+	public void initialize() throws Exception;
+	
+	public void shutdown() throw Exception;
+	
+	public void send(byte [] data ) throws Exception;
+	
+	public byte [] recieve() throws Exception;
+	
+	
+}

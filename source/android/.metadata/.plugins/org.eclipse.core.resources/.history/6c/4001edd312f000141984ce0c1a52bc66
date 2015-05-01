@@ -1,0 +1,39 @@
+package com.bobina.robot;
+
+import com.bobina.robot.commands.Commands;
+import com.bobina.robot.communication.Communication;
+
+public class Robot {
+	private Communication communication;
+	private Commands	  commands;
+	
+	public Robot(Communication communication, Commands commands) {
+		this.communication = communication;
+		this.commands = commands;
+	}
+	
+	public void moveOn(){
+		
+	}
+	
+	public void moveBack(){
+		
+	}
+	
+	public void moveLeft(){
+		
+	}
+	public void moveRight(){
+		
+	}
+	
+	
+	public Commands getCommands() {
+		return commands;
+	}
+	public Communication getCommunication() {
+		return communication;
+	}
+	
+	
+}

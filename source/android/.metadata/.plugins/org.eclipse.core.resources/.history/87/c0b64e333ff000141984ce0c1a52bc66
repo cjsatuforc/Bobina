@@ -1,0 +1,18 @@
+package com.bobina.robot.commands;
+
+public class CommandsDAO {
+	public Commands getDefaultCommands(){
+		Commands commands = new Commands();
+		
+		commands.setMoveOnCommand("f"});
+		commands.setMoveBackCommand(new byte[]{(byte)'t'});
+		commands.setMoveRightCommand(new byte[]{(byte)'d'});
+		commands.setMoveLeftCommand(new byte[]{(byte)'e'});
+				
+		return commands;
+	}
+	
+	public Commands getCustonCommands(){
+		return getDefaultCommands();
+	}
+}

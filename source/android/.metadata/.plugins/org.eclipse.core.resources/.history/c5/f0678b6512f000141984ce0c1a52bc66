@@ -1,0 +1,7 @@
+package com.bobina.robot;
+
+import com.bobina.robot.communication.Communication;
+
+public class Robot {
+	private Communication communication;
+}

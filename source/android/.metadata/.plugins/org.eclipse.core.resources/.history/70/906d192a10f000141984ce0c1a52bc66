@@ -1,0 +1,22 @@
+package com.bobina.communication;
+
+public class BluetoothCommunication implements Communication{
+
+	@Override
+	public void initialize() throws Exception {
+		
+	}
+
+	@Override
+	public void send(byte[] data) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public byte[] recieve() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

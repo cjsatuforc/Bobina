@@ -1,3 +1,6 @@
 INDEX VERSION 1.127+C:\Users\Eduardo\Documents\Arduino\projetos\Bobina\source\android\.metadata\.plugins\org.eclipse.jdt.core
-872822187.index
 1284074322.index
+3032715526.index
+872822187.index
+427049163.index
+3582789582.index

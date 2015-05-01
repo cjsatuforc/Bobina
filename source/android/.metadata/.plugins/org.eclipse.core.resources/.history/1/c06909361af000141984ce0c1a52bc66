@@ -1,0 +1,46 @@
+package com.bobina.robot.communication;
+
+import android.bluetooth.BluetoothAdapter;
+
+
+public class BluetoothCommunication implements Communication{
+
+	@Override
+	public void initialize() throws Exception {
+		BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		if (mBluetoothAdapter == null) {
+			throw new IllegalStateException("Bluetooth not supported");
+		}
+	}
+
+	@Override
+	public void send(byte[] data) throws Exception {
+		
+	}
+
+	@Override
+	public byte[] recieve() throws Exception {
+		return null;
+	}
+
+	@Override
+	public void shutdown() throws Exception {
+		
+	}
+	
+	@Override
+	public boolean isConnected() throws Exception {
+		return false;
+	}
+
+	@Override
+	public void connect() throws Exception {
+		
+	}
+
+	@Override
+	public void setListener(CommunicationListener listener) {
+		
+	}
+
+}

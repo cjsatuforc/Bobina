@@ -1,0 +1,9 @@
+1430490421411	Move compilation unit
+1430490539137	Rename package 'com.bobina.view.communication'
+1430491964279	Move compilation unit
+1430491968445	Move compilation unit
+1430491972960	Delete element
+1430496362877	Rename field 'mReceiver'
+1430510438618	Rename method 'writeText'
+1430510488755	Rename method 'writeOutput'
+1430510541260	Rename method 'writeToConsole'

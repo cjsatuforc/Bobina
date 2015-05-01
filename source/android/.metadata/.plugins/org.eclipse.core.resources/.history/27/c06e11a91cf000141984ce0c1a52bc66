@@ -1,0 +1,97 @@
+package com.bobina.robot.communication;
+
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.widget.Toast;
+
+/**
+ * Communicates with the robot throw Bluetooth
+ * @author Eduardo
+ *
+ */
+public class BluetoothCommunication implements Communication{
+
+	private Activity activity;
+	private CommunicationListener communicationListener;
+	private BluetoothAdapter mBluetoothAdapter;
+	
+	public BluetoothCommunication(Activity activity) {
+		this.activity = activity;
+	}
+	
+	@Override
+	public void initialize() throws Exception {
+		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		//check if bluetooth is supported
+		if (mBluetoothAdapter == null) {
+			throw new IllegalStateException("Bluetooth not supported");
+		}
+
+		//enable bluetooth
+		if (!mBluetoothAdapter.isEnabled()) {
+		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+		    activity.startActivityForResult(enableBtIntent, 0);
+		}
+	}	
+	
+	@Override
+	public void send(byte[] data) throws Exception {
+		
+	}
+
+	@Override
+	public byte[] recieve() throws Exception {
+		return null;
+	}
+
+	@Override
+	public void shutdown() throws Exception {
+		
+	}
+	
+	@Override
+	public boolean isConnected() throws Exception {
+		return false;
+	}
+
+	@Override
+	public void connect() throws Exception {
+		discoveryDevices();
+	}
+
+	@Override
+	public void setListener(CommunicationListener listener) {
+		this.communicationListener = listener;
+	}
+	
+	private void discoveryDevices(){
+//		// Register the BroadcastReceiver
+		
+		Intent discoverableIntent = new
+				Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+				discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+				startActivity(discoverableIntent);
+		
+		IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+		activity.registerReceiver(discoveryDevicesRecieve, filter); // Don't forget to unregister during onDestroy
+	}
+	private final BroadcastReceiver discoveryDevicesRecieve = new BroadcastReceiver() {
+	    public void onReceive(Context context, Intent intent) {
+	        String action = intent.getAction();
+	        // When discovery finds a device
+	        if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+	           
+	            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+	            Toast.makeText(activity, device.getName() + "\n" + device.getAddress(), Toast.LENGTH_LONG).show();
+	       //    mArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+	        }
+	    }
+	};
+	
+
+}

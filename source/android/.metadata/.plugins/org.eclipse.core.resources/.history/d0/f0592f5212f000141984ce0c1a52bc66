@@ -1,0 +1,18 @@
+package com.bobina.robot.commands;
+/**
+ * Entity class that contains the
+ * values to send to the robot
+ * @author Eduardo
+ *
+ */
+public class Commands {
+	private byte [] moveOnCommand;
+	private byte [] moveBackCommand;	
+	private byte [] moveLeftCommand;
+	private byte [] moveRightCommand;
+	
+	private byte [] customCommand1;
+	private byte [] customCommand2;
+	private byte [] customCommand3;
+	private byte [] customCommand4;
+}

@@ -1,6 +1,7 @@
 package com.bobina.view;
 
 import android.content.Context;
+
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -13,11 +14,14 @@ public class ConsoleView extends TextView{
 		super(context);
 	}
 	
-	public void writeText(String text){
+	public void write(String label,String text){
 		String oldString = getText().toString();
-		String newString = oldString + "[output]: "+text+"\n";
+		String newString = oldString + "["+label+"]: "+text+"\n";
 		setText(newString);
 	}
+	
+	
+	
 
 	
 

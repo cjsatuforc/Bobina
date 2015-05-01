@@ -1,0 +1,7 @@
+package com.bobina.robot.commands;
+
+public class CommandsDAO {
+	public Commands getDefaultCommands(){
+		
+	}
+}

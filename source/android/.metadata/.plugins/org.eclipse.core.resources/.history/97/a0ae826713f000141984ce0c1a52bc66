@@ -1,0 +1,56 @@
+package com.bobina.robot;
+
+import com.bobina.robot.commands.Commands;
+import com.bobina.robot.communication.Communication;
+
+public class Robot {
+	private Communication communication;
+	private Commands	  commands;
+	
+	public Robot(Communication communication, Commands commands) {
+		this.communication = communication;
+		this.commands = commands;
+	}
+	
+	public void moveOn(){
+		
+	}
+	
+	public void moveBack(){
+		
+	}
+	
+	public void moveLeft(){
+		
+	}
+	public void moveRight(){
+		
+	}
+	public void command1(){
+		
+	}
+	public void command2(){
+		
+	}
+	public void command3(){
+	
+	}
+	public void command4(){
+	
+	}
+	
+	private void send(byte [] data){
+		if ( communication!= null && communication.isConnected()){
+			communication.send(data);
+		}
+	}
+	
+	public Commands getCommands() {
+		return commands;
+	}
+	public Communication getCommunication() {
+		return communication;
+	}
+	
+	
+}

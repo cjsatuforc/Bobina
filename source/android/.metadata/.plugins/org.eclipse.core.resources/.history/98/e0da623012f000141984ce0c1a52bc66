@@ -1,0 +1,8 @@
+package com.bobina.robot.commands;
+
+public class Commands {
+	private byte [] moveOnCommand;
+	private byte [] moveBackCommand;	
+	private byte [] moveLeftCommand;
+	private byte [] moveRightCommand;
+}

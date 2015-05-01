@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bobina</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="main_title_disconnected">Robot disconnected, please connect</string>
+    <string name="blank"></string>
+    
+    <!-- Menu Strings -->
+	<string name="action_settings">Settings</string>
+	<string name="action_connect">Connect</string>
+	<string name="action_connect">Disconnect</string>
+</resources>

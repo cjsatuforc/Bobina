@@ -1,0 +1,52 @@
+package com.bobina.robot.communication;
+/**
+ * Interface to Communicate with robot
+ * @author Eduardo
+ *
+ */
+public interface Communication {
+	/**
+	 * Inititialize the communication channel
+	 * @throws Exception
+	 */
+	public void initialize() throws Exception;
+	
+	/**
+	 * Connect to robot
+	 * @throws Exception
+	 */
+	public void connect() throws Exception;		
+	
+	/**
+	 * Finalize the communication channel
+	 * @throws Exception
+	 */	
+	public void shutdown() throws Exception;
+	
+	/**
+	 * 
+	 * @return if device is connected to a robot 
+	 */
+	public boolean isConnected() throws Exception;
+	
+	/**
+	 * Send data to robot
+	 * @param data data to send
+	 * @throws Exception
+	 */
+	public void send(byte [] data ) throws Exception;
+	
+	/**
+	 * Recieve data from robot
+	 * @return data recieved
+	 * @throws Exception
+	 */
+	public byte [] recieve() throws Exception;
+	
+	/**
+	 * Set the event listener
+	 * @param listener
+	 */
+	public void setListener(CommunicationListener listener);
+	
+}

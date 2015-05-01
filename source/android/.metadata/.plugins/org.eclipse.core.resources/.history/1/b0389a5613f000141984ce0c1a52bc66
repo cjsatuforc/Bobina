@@ -1,0 +1,32 @@
+package com.bobina.robot.communication;
+
+
+public class BluetoothCommunication implements Communication{
+
+	@Override
+	public void initialize() throws Exception {
+		
+	}
+
+	@Override
+	public void send(byte[] data) throws Exception {
+		
+	}
+
+	@Override
+	public byte[] recieve() throws Exception {
+		return null;
+	}
+
+	@Override
+	public void shutdown() throws Exception {
+		
+	}
+	
+	@Override
+	public boolean isConnected() throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}
