@@ -8,7 +8,7 @@
     #endif
 
 #include "Servo.h"
-
+#include "Command.h"
 /*
  * id's that identifies the
  * motors of the rotot
@@ -47,11 +47,18 @@ class Robot{
 
     bool move_motor(int motor_id,int servo_degrees);
 
+    /*
+    *   Make you happy
+    */
+    void makeMeHappy();
+
     
     void move_on();
     void move_back();
     void move_left();
     void move_right();
+
+    void testMotors();
 private:
     int tempo_espera = 100;
     
@@ -65,6 +72,8 @@ private:
     void move_back_left();
     void move_back_right();
     void ajeita_direita();   
+
+    Command command;
 
 };
 
