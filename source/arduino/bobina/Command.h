@@ -12,8 +12,17 @@
 #define MOVE_LEFT		4
 #define TEST_MOTORS		5
 
+/*
+*  Commands mode
+*/
+
+#define AUTOMATIC_MODE	99
+#define MANUAL_MODEq	88
+
+
 /**
- *
+ * Sends commands to the Robot. It can be 
+ * automatic or manual
  */
 class Command{
 public:
@@ -22,6 +31,15 @@ public:
 	 * the corresponding command
 	 */
 	int proccess();
+
+
+	/*
+	*
+	*/
+	bool setMode(int mode);
+
+private:
+	bool automatic;
 
 };
 

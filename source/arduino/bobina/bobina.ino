@@ -18,11 +18,8 @@
 #define SERVO_4_PIN  8
 
 Robot bobina;
-Command command;
-
-
-
 #define DATA_RATE 9600
+
 void setup() {
   Serial.begin(DATA_RATE);
   bobina.setup(SERVO_1_PIN,SERVO_2_PIN,SERVO_3_PIN,SERVO_4_PIN);
@@ -31,82 +28,9 @@ void setup() {
   
 }
 
-/**
-* start a test in the motors
-* to know if the right motors are selected
-* and if it's moving right
-*/
-void testMotors()
+void loop() 
 {
-  Serial.println("girando perna esquerda");
-  bobina.move_motor(SERVO_1,SERVO_1_INITIAL_POSITION);
-  delay(1000);
-  bobina.move_motor(SERVO_1,SERVO_1_INITIAL_POSITION+LEG_MOVE_DEGREES);
-  delay(1000);
-  bobina.move_motor(SERVO_1,SERVO_1_INITIAL_POSITION-LEG_MOVE_DEGREES);
-  delay(1000);
-  bobina.move_motor(SERVO_1,SERVO_1_INITIAL_POSITION);
-  delay(1000);
-
-  Serial.println("girando perna direita");
-  bobina.move_motor(SERVO_2,SERVO_2_INITIAL_POSITION);
-  delay(1000);
-  bobina.move_motor(SERVO_2,SERVO_2_INITIAL_POSITION+LEG_MOVE_DEGREES);
-  delay(1000);
-  bobina.move_motor(SERVO_2,SERVO_2_INITIAL_POSITION-LEG_MOVE_DEGREES);
-  delay(1000);
-  bobina.move_motor(SERVO_2,SERVO_2_INITIAL_POSITION);
-  delay(1000);
-
-  Serial.println("inclinando perna esquerda");
-  bobina.move_motor(SERVO_3,SERVO_2_INITIAL_POSITION);
-  delay(1000);
-  bobina.move_motor(SERVO_3,SERVO_2_INITIAL_POSITION+LEG_MOVE_DEGREES);
-  delay(1000);
-  bobina.move_motor(SERVO_3,SERVO_2_INITIAL_POSITION-LEG_MOVE_DEGREES);
-  delay(1000);
-  bobina.move_motor(SERVO_3,SERVO_2_INITIAL_POSITION);
-  delay(1000);
-
-  Serial.println("inclinando perna direita");
-  bobina.move_motor(SERVO_4,SERVO_2_INITIAL_POSITION);
-  delay(1000);
-  bobina.move_motor(SERVO_4,SERVO_2_INITIAL_POSITION+LEG_MOVE_DEGREES);
-  delay(1000);
-  bobina.move_motor(SERVO_4,SERVO_2_INITIAL_POSITION-LEG_MOVE_DEGREES);
-  delay(1000);
-  bobina.move_motor(SERVO_4,SERVO_2_INITIAL_POSITION);
-  delay(1000);  
-
-}
-
-void loop() {
     
-//  if (Serial.available()){
-   // char op = Serial.read();
-//    Serial.println(op);
-    switch ( command.proccess() )
-    {
-      case MOVE_ON:  
-       bobina.move_on();
-       break;
-     case MOVE_BACK:
-      bobina.move_back();
-        break;
-      case MOVE_RIGHT:
-        bobina.move_right();
-         break;
-      case MOVE_LEFT:
-        bobina.move_left();
-        break; 
-      case TEST_MOTORS:
-        testMotors();
-        break;     
-    }
-  //}
+  bobina.makeMeHappy();
   
 }
-
-
-
-

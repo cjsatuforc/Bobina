@@ -31,10 +31,16 @@ int Command::proccess()
 
 	    case 'x':
 	    	return TEST_MOTORS;
-	        
-	        
+	        	        
 	    }
 	}
     return NO_COMMAND;
 
+}
+
+
+bool Command::setMode(int mode)
+{
+	Command::automatic = mode;
+	return true;
 }

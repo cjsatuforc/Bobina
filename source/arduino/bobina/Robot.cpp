@@ -22,6 +22,27 @@ void Robot::setup(int servo1_pin,int servo2_pin,int servo3_pin,int servo4_pin)
   Robot::servo4.write(SERVO_4_INITIAL_POSITION);  
 }
 
+
+void Robot::makeMeHappy()
+{
+
+    switch ( command.proccess() )
+    {
+      case MOVE_ON:  
+       move_on();
+       break;
+     case MOVE_BACK:
+        move_back();
+        break;
+      case MOVE_RIGHT:
+        move_right();
+        break;
+      case MOVE_LEFT:
+        move_left();
+        break;         
+    }
+}
+
 void Robot::move_on_left()
 {
    
@@ -164,4 +185,53 @@ void Robot::move_left()
 
   delay(tempo_espera);
   
+}
+
+/**
+* start a test in the motors
+* to know if the right motors are selected
+* and if it's moving right
+*/
+void Robot::testMotors()
+{
+  Serial.println("girando perna esquerda");
+  move_motor(SERVO_1,SERVO_1_INITIAL_POSITION);
+  delay(1000);
+  move_motor(SERVO_1,SERVO_1_INITIAL_POSITION+LEG_MOVE_DEGREES);
+  delay(1000);
+  move_motor(SERVO_1,SERVO_1_INITIAL_POSITION-LEG_MOVE_DEGREES);
+  delay(1000);
+  move_motor(SERVO_1,SERVO_1_INITIAL_POSITION);
+  delay(1000);
+
+  Serial.println("girando perna direita");
+  move_motor(SERVO_2,SERVO_2_INITIAL_POSITION);
+  delay(1000);
+  move_motor(SERVO_2,SERVO_2_INITIAL_POSITION+LEG_MOVE_DEGREES);
+  delay(1000);
+  move_motor(SERVO_2,SERVO_2_INITIAL_POSITION-LEG_MOVE_DEGREES);
+  delay(1000);
+  move_motor(SERVO_2,SERVO_2_INITIAL_POSITION);
+  delay(1000);
+
+  Serial.println("inclinando perna esquerda");
+  move_motor(SERVO_3,SERVO_2_INITIAL_POSITION);
+  delay(1000);
+  move_motor(SERVO_3,SERVO_2_INITIAL_POSITION+LEG_MOVE_DEGREES);
+  delay(1000);
+  move_motor(SERVO_3,SERVO_2_INITIAL_POSITION-LEG_MOVE_DEGREES);
+  delay(1000);
+  move_motor(SERVO_3,SERVO_2_INITIAL_POSITION);
+  delay(1000);
+
+  Serial.println("inclinando perna direita");
+  move_motor(SERVO_4,SERVO_2_INITIAL_POSITION);
+  delay(1000);
+  move_motor(SERVO_4,SERVO_2_INITIAL_POSITION+LEG_MOVE_DEGREES);
+  delay(1000);
+  move_motor(SERVO_4,SERVO_2_INITIAL_POSITION-LEG_MOVE_DEGREES);
+  delay(1000);
+  move_motor(SERVO_4,SERVO_2_INITIAL_POSITION);
+  delay(1000);  
+
 }
