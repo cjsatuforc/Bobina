@@ -16,7 +16,7 @@ The original project is available on
 ## Instalation
 ### Assembly 
 1. Put all the servos in 90º(You can use the 'initial angles' source to do this)
-2. Assembly the part as showed in these pictures [here]()
+2. Assembly the part as showed in these pictures [here](https://github.com/eduardossampaio/Bobina/tree/master/media/Assembly)
 3. Plug the servo on correspondent pins in your Arduino board, as specified on this [file](https://github.com/eduardossampaio/Bobina/blob/master/source/arduino/bobina/Robot.h)
 4. Plug the bluetooth module on your Arduino, as specified [here](http://2.bp.blogspot.com/-2GuNBsL-IWs/ViBRZs51f-I/AAAAAAAAAIE/ErpAQiemPNs/s1600/image005.png)
 5. Adjust the initial angles of each motor modifying the this  [file](https://github.com/eduardossampaio/Bobina/blob/master/source/arduino/bobina/Robot.h)
